@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&family=Inter:wght@400;500;700;800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #00FA9A;
+  --color-primary-light: #4DFFB8;
+  --color-primary-medium: #A5FFD8;
+  --color-primary-bg: #E8FFF5;
+  --color-brand-light: #F0FFF9;
+
+  --color-slate-50: #F8FAFC;
+  --color-slate-100: #F1F5F9;
+  --color-slate-200: #E2E8F0;
+  --color-slate-400: #94A3B8;
+  --color-slate-500: #64748B;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1E293B;
+  --color-slate-900: #0F172A;
+  --color-slate-950: #020617;
+
+  --color-emerald-50: #ECFDF5;
+  --color-emerald-100: #D1FAE5;
+  --color-emerald-800: #065F46;
+  --color-emerald-950: #022C22;
+
+  --font-sans: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Custom Keyframe Animations */
+@keyframes aerial-wave-wash {
+  0% {
+    transform: translateY(-20vh) scaleY(0.7) skewX(-2deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  45% {
+    transform: translateY(65vh) scaleY(1.05) skewX(1deg);
+    opacity: 0.75;
+  }
+  60% {
+    transform: translateY(85vh) scaleY(0.95) skewX(-1deg);
+    opacity: 0.45;
+  }
+  80% {
+    transform: translateY(105vh) scaleY(0.85) skewX(0deg);
+    opacity: 0.05;
+  }
+  100% {
+    transform: translateY(120vh) scaleY(0.75) skewX(2deg);
+    opacity: 0;
+  }
+}
+
+@keyframes ocean-tide {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(-35deg);
+  }
+  50% {
+    transform: translateY(2.5vh) scale(1.015) rotate(-35.5deg);
+  }
+}
+
+@keyframes compass-wiggle {
+  0%, 100% {
+    transform: rotate(175deg);
+  }
+  50% {
+    transform: rotate(185deg);
+  }
+}
+
+@keyframes blob-float-1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -40px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+@keyframes blob-float-2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-30px, 40px) scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Helper Animation Classes */
+.animate-aerial-wave {
+  animation: aerial-wave-wash 16s ease-in-out infinite;
+}
+
+.animate-ocean-tide {
+  animation: ocean-tide 20s ease-in-out infinite;
+}
+
+.animate-compass-wiggle {
+  animation: compass-wiggle 3s ease-in-out infinite;
+}
+
+.animate-blob-1 {
+  animation: blob-float-1 12s ease-in-out infinite;
+}
+
+.animate-blob-2 {
+  animation: blob-float-2 15s ease-in-out infinite;
+}
+
+.animate-shimmer-slide {
+  animation: shimmer 2s infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Custom Utility Classes */
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(209, 250, 229, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.glass-card:hover {
+  box-shadow: 0 10px 40px rgba(0, 250, 154, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+/* Keyboard navigation visible focus outline */
+*:focus-visible {
+  outline: none !important;
+  border-color: #00FA9A !important;
+  box-shadow: 0 0 0 2px rgba(0, 250, 154, 0.4) !important;
+}
+
+/* Ensure interactive elements display a pointer cursor */
+a, button, select, input[type="checkbox"], input[type="radio"], [role="button"] {
+  cursor: pointer;
+}
+
+/* Ensure disabled items display a blocked cursor */
+button:disabled, input:disabled, select:disabled, [role="button"]:disabled {
+  cursor: not-allowed !important;
+}
+
+/* Smooth HTML scrolling */
+html {
+  scroll-behavior: smooth;
+}
