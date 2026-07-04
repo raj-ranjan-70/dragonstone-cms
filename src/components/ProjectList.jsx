@@ -26,11 +26,21 @@ export default function ProjectList({ projects, onEdit, onDelete, loading = fals
 
   const activeOption = sortOptions.find(opt => opt.value === sortBy) || sortOptions[0];
 
-  // Format dates nicely
+  // Format dates nicely (relative for <= 7 days, absolute otherwise)
   const formatDate = (isoString) => {
     if (!isoString) return 'N/A';
     try {
       const date = new Date(isoString);
+      const now = new Date();
+      const diffTime = now - date;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays >= 0 && diffDays <= 7) {
+        if (diffDays === 0) return 'Today';
+        if (diffDays === 1) return '1 day ago';
+        return `${diffDays} days ago`;
+      }
+
       return date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',

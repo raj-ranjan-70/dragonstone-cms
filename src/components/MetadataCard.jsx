@@ -1,12 +1,22 @@
 import React from 'react';
-import { ShieldCheck, Calendar, Database } from 'lucide-react';
+import { ShieldCheck, Calendar } from 'lucide-react';
 
-export default function MetadataCard({ version, lastUpdated }) {
-  // Format dates nicely
+export default function MetadataCard({ lastUpdated }) {
+  // Format dates nicely (relative for <= 7 days, absolute otherwise)
   const formatDate = (isoString) => {
     if (!isoString) return 'N/A';
     try {
       const date = new Date(isoString);
+      const now = new Date();
+      const diffTime = now - date;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays >= 0 && diffDays <= 7) {
+        if (diffDays === 0) return 'Today';
+        if (diffDays === 1) return '1 day ago';
+        return `${diffDays} days ago`;
+      }
+
       return date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
@@ -49,23 +59,8 @@ export default function MetadataCard({ version, lastUpdated }) {
       {/* Divider */}
       <div className="hidden md:block w-[1px] bg-slate-200/60 self-stretch" />
 
-      {/* File / Version Metadata */}
-      <div className="flex flex-col sm:flex-row gap-6 md:gap-8 flex-1 justify-around">
-        {/* Version Info */}
-        <div className="flex items-start gap-3">
-          <div className="p-2.5 rounded-xl bg-slate-50 text-slate-500 border border-slate-200/50">
-            <Database size={16} />
-          </div>
-          <div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">
-              JSON Version
-            </span>
-            <span className="text-xl font-black text-slate-900 leading-none whitespace-nowrap">
-              Version {version}
-            </span>
-          </div>
-        </div>
-
+      {/* Last Updated Metadata */}
+      <div className="flex items-center justify-center flex-1">
         {/* Last Updated Timestamp */}
         <div className="flex items-start gap-3">
           <div className="p-2.5 rounded-xl bg-slate-50 text-slate-500 border border-slate-200/50">
