@@ -1,7 +1,7 @@
 /**
  * Reusable HTTP API client.
  */
-const BASE_URL = ''; // Relative paths to the same origin
+const BASE_URL = import.meta.env.WORKER_API_URL || "";; // Relative paths to the same origin
 
 async function request(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
