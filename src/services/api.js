@@ -1,7 +1,12 @@
+/* global process */
 /**
  * Reusable HTTP API client.
  */
-const BASE_URL = import.meta.env.WORKER_API_URL || "";; // Relative paths to the same origin
+const BASE_URL = (
+  (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.WORKER_BASE_API_URL) ||
+  (typeof process !== 'undefined' && process.env && process.env.WORKER_BASE_API_URL) ||
+  ''
+).replace(/\/$/, '');
 
 async function request(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
